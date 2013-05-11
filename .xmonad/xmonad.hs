@@ -23,6 +23,7 @@ import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Spacing
+import XMonad.Layout.Gaps
 import XMonad.Util.Run (spawnPipe, hPutStrLn)
 import qualified Data.Map                 as M
 import qualified GHC.IO.Handle.Types      as H
@@ -260,12 +261,16 @@ main = do
               webLayout $
               standardLayout
               where
-                  standardLayout = tiled     ||| mirrorTiled ||| fullTiled ||| noBor
-                  var1Layout     = fullTiled ||| tiled       ||| noBor
-                  webLayout      = onWorkspace (myWorkspaces !! 1) var1Layout
+                  standardLayout = tiled
+                                   ||| focused
+                                   ||| fullTiled
+                  webLayout      = onWorkspace (myWorkspaces !! 1) $ fullTiled
+                                   ||| tiled
+                                   ||| mirrorTiled
                   fullTiled      = Tall nmaster delta (1/4)
                   mirrorTiled    = Mirror . spacing 20 $ Tall nmaster delta ratio
-                  noBor          = noBorders (FS.fullscreenFull Full)
+                  focused        = gaps [(L,385), (R,385),(U,10),(D,10)]
+                                   $ noBorders (FS.fullscreenFull Full)
                   tiled          = spacing 20 $ Tall nmaster delta ratio
                   -- The default number of windows in the master pane
                   nmaster = 1
