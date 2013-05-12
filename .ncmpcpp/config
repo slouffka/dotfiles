@@ -221,7 +221,7 @@ display_screens_numbers_on_start = "no"
 ## As you can see, above example will switch between
 ## playlist, visualizer and media library screens.
 ##
-screen_switcher_mode = "sequence: 2 -> 5 -> 9 -> 10"
+screen_switcher_mode = "sequence: 2 -> 5 -> 6 -> 10"
 
 ## Default width of locked screen (in %).
 ## Acceptable values are from 20 to 80.

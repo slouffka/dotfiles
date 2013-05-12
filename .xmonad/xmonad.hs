@@ -13,6 +13,7 @@
 ------------------------------------------------------------------------
 import System.Exit
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks (manageDocks, avoidStruts)
@@ -41,10 +42,12 @@ myWorkspaces = clickable . (map dzenEscape) $ [ "main"
                                               , "docs"
                                               , "foo()"
                                               ]
-    where clickable l = [ x ++ ws ++ "^ca()" |
+    where clickable l = [ x ++ ws ++ "^ca()^ca()^ca()" |
                         (i,ws) <- zip ['1','2','3','q','w','e'] l,
                         let n = i
-                            x = "^ca(1,xdotool key super+" ++ show (n) ++ ")"]
+                            x =    "^ca(4,xdotool key super+Right)"
+                                ++ "^ca(5,xdotool key super+Left)"
+                                ++ "^ca(1,xdotool key super+" ++ show (n) ++ ")"]
 -- -¬
 ------------------------------------------------------------------------
 -- Key bindings --¬
@@ -58,6 +61,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modShift,xK_c), kill)
      -- Rotate through the available layout algorithms
     , ((modm,xK_space), sendMessage NextLayout)
+     -- Move to workspace
+    , ((modm,xK_Right), nextWS)
+    , ((modm,xK_Left) , prevWS)
     -- Change Focused Windows
     , ((modm,xK_Tab), windows W.focusDown  )
     , ((modm,xK_j)  , windows W.focusDown  )
@@ -88,9 +94,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,xK_m)     , spawn "urxvt -e mutt"       )
     , ((modShift,xK_r) , spawn "killall dzen2; xmonad --recompile; xmonad --restart")
     -- Alsa Multimedia Control
-    , ((0, 0x1008ff11), spawn "amixer -q set Master 5%- unmute")
-    , ((0, 0x1008ff13), spawn "amixer -q set Master 5%+ unmute")
-    , ((0, 0x1008ff12), spawn "amixer -q set Master toggle"    )
+    , ((0, 0x1008ff11), spawn "/home/alex/.xmonad/Scripts/volctl down"  )
+    , ((0, 0x1008ff13), spawn "/home/alex/.xmonad/Scripts/volctl up"    )
+    , ((0, 0x1008ff12), spawn "/home/alex/.xmonad/Scripts/volctl toggle")
     -- Brightness Control
     , ((0, 0x1008ff03), spawn "xbacklight -dec 20")
     , ((0, 0x1008ff02), spawn "xbacklight -inc 20")
@@ -109,7 +115,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     where modShift  = modm .|. shiftMask
           dmenuCall = "dmenu_run -i -h 18"
-                      ++ " -fn '*-profont-*-*-*-*-12-*-*-*-*-*-*-*' "
+                      ++ " -fn 'termsyn-8' "
                       ++ " -sb '" ++ colLook Green 0 ++ "'"
                       ++ " -nb '#000000'"
 
@@ -254,7 +260,7 @@ main = do
           callDzen2 = "conky | dzen2 -x 500 -ta r -fn '"
                       ++ dzenFont
                       ++ "' -bg '#000000' -h 18 -e 'onnewinput=;button3='"
-          dzenFont  = "inconsolata for powerline-8"
+          dzenFont  = "termsyn-8"
           -- | Layouts --¬
           myLayout = mkToggle (NOBORDERS ?? FULL ?? EOT) $
               avoidStruts $
