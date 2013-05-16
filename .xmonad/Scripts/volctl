@@ -16,7 +16,7 @@ pipe='/tmp/volpipe'
 dzen_args=( -tw 165 -h 20 -x 600 -y 50 -bg '#101010' )
 
 # similarly for gdbar
-gdbar_args=( -w 150 -h 5 -fg '#606060' -bg '#404040' )
+gdbar_args=( -w 150 -h 5 -fg '#ffffff' -bg '#404040' )
 
 # spawn dzen reading from the pipe (unless it's in mid-action already).
 if [[ ! -e "$pipe" ]]; then

@@ -238,7 +238,7 @@ main :: IO ()
 main = do
     d <- spawnPipe callDzen1
     spawn callDzen2
-    xmonad $ ewmh defaultConfig {
+    xmonad $ defaultConfig {
         terminal                  = "termite",
         focusFollowsMouse         = True,
         borderWidth               = 3,
