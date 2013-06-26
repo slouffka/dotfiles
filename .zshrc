@@ -169,7 +169,9 @@ alias ep="~/Scripts/pass/editpass"
 alias ls="ls --group-directories-first --color=always"
 alias zsnes="optirun zsnes"
 alias steam="optirun steam"
-alias ftl="cd ~/.local/share/Steam/SteamApps/common/FTL\ Faster\ Than\ Light/ && ./FTL"
+alias ftl="cd ~/Data/Games/SteamApps/common/FTL\ Faster\ Than\ Light/ && ./FTL && cd -"
+alias dwarves="cd ~/Dropbox/Programs/dwarves && ./dfhack && cd -"
+alias updates="pacman -Qqu"
 #fortune | cowsay | lolcat
 # -¬
 # ---------------------------------------------------------------------

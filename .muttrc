@@ -90,7 +90,21 @@ set sidebar_sort      = no
 set sidebar_width     = 25
 set sidebar_shortpath = yes
 set sidebar_delim     = '  │'
-mailboxes =Inbox =Amigos =Capoeira =Familia =Games =Github =Linux =Musica =Personal =Propios =Recibos =Trabajo =Universidad +Search
+mailboxes =Inbox\
+          =Friends\
+          =Capoeira\
+          =Family\
+          =Games\
+          =GitHub\
+          =Linux\
+          =Personal\
+          =Own\
+          =Receipts\
+          =Music\ Lessons\
+          =UPV\
+          =Erasmus\
+          =Servipoli\
+          +Search
 
 #  -----------------------------------------------------------------
 #  -¬

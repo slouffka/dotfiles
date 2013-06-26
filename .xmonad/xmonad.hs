@@ -159,6 +159,7 @@ myManageHook = manageDocks <+> composeAll
     , className =? "Firefox"             --> doShift (myWorkspaces !! 1)
     , className =? "Google-chrome"       --> doShift (myWorkspaces !! 1)
     , className =? "Eclipse"             --> doShift (myWorkspaces !! 5)
+    , className =? "Dwarf_Fortress"      --> doShift (myWorkspaces !! 2)
     , resource  =? "desktop_window"      --> doIgnore
     , resource  =? "kdesktop"            --> doIgnore
     , isFullscreen --> doFullFloat ]
