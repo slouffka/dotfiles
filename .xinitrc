@@ -6,7 +6,7 @@ nitrogen --restore &
 xset b off &
 bind C-m previous-window &
 pulseaudio --start &
-compton -cCfb -D 4 -r 5 -l -5 -t -2 -o 0.2 &
+compton -cCfb -D 4 -r 5 -l -5 -t -2 -o 0.2 -e 0.6 &
 sleep 10 && dropboxd &
 dunst &
 eval $(keychain --eval --agents ssh -Q --quiet id_rsa) &

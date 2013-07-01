@@ -155,6 +155,7 @@ nls () {
 # ---------------------------------------------------------------------
 # Aliases --¬
 # ---------------------------------------------------------------------
+alias tmux="TERM=xterm-256color tmux"
 alias clc="clear"
 alias copy="rsync -aP"
 alias :q="exit"
@@ -172,6 +173,7 @@ alias steam="optirun steam"
 alias ftl="cd ~/Data/Games/SteamApps/common/FTL\ Faster\ Than\ Light/ && ./FTL && cd -"
 alias dwarves="cd ~/Dropbox/Programs/dwarves && ./dfhack && cd -"
 alias updates="pacman -Qqu"
+alias netrestart="sudo netctl-auto stop wlp4s0 && sudo netctl-auto start wlp4s0"
 #fortune | cowsay | lolcat
 # -¬
 # ---------------------------------------------------------------------

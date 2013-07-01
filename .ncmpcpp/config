@@ -145,7 +145,7 @@ selected_item_prefix = "$8"
 ##   not available.
 ##
 #
-song_columns_list_format = " (25)[green]{a:Artist} (40)[red]{t|f:Title} (40)[magenta]{br} (7f)[black]{lr:} "
+song_columns_list_format = " (25)[green]{a:Artist} (40)[blue]{t|f:Title} (40)[magenta]{br} (7f)[black]{lr:} "
 #
 ##### various settings #####
 #
@@ -289,9 +289,9 @@ colors_enabled = "yes"
 #empty_tag_color = "cyan"
 #header_window_color = "default"
 #volume_color = "default"
-state_line_color = "green"
+state_line_color = "cyan"
 state_flags_color = "blue"
-main_window_color = "green"
+main_window_color = "cyan"
 #color1 = "white"
 #color2 = "green"
 main_window_highlight_color = "yellow"
@@ -299,6 +299,6 @@ progressbar_color = "white"
 statusbar_color = "white"
 alternative_ui_separator_color = "black"
 active_column_color = "blue"
-visualizer_color = "green"
+visualizer_color = "cyan"
 window_border_color = "blue"
 active_window_border = "cyan"

@@ -12,17 +12,18 @@ STATUS=`acpi -b | awk '{gsub(/,/,""); print $3}'`
 
 if [[ $BAT -lt 10  ]]; then
     ICON="bat_empty_02.xbm"
-    BATBAR=`echo -e "^fg(red)$BAT"`
+    BATBAR=`echo -e "^fg(red)$BAT"\
+        | gdbar -bg "#393939" -fg red -h 1 -w 60`
     if [[ $STATUS != "Charging" ]]; then
         notify-send "Warning, battery level below 10 percent" -u critical -t 30000
     fi
 else
     ICON="bat_full_02.xbm"
-    BATBAR=`echo -e "$BAT"`
+    BATBAR=`echo -e "$BAT"\
+        | gdbar -bg "#393939" -fg "#d6d6d6" -h 1 -w 60`
 fi
 
 if [[ $STATUS != "Discharging" ]]; then
-    BAT=`acpi -b | awk '{gsub(/%/,""); print $4}'`
     ICON="ac.xbm"
 fi
 ICON='^i(/home/alex/.xmonad/dzen/icons/xbm8x8/'"$ICON)"

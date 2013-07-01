@@ -11,11 +11,9 @@
 ------------------------------------------------------------------------
 -- Imports --¬
 ------------------------------------------------------------------------
-import System.Exit
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks (manageDocks, avoidStruts)
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
@@ -34,20 +32,20 @@ import qualified XMonad.StackSet          as W
 ------------------------------------------------------------------------
 -- Layout names and quick access keys --¬
 ------------------------------------------------------------------------
-myWorkspaces :: [[Char]]
-myWorkspaces = clickable . (map dzenEscape) $ [ "main"
-                                              , "web"
-                                              , "media"
-                                              , "misc"
-                                              , "docs"
-                                              , "foo()"
-                                              ]
+myWorkspaces :: [String]
+myWorkspaces = clickable . map dzenEscape $ [ "I"
+                                            , "II"
+                                            , "III"
+                                            , "IV"
+                                            , "V"
+                                            , "VI"
+                                            ]
     where clickable l = [ x ++ ws ++ "^ca()^ca()^ca()" |
-                        (i,ws) <- zip ['1','2','3','q','w','e'] l,
+                        (i,ws) <- zip "123qwe" l,
                         let n = i
                             x =    "^ca(4,xdotool key super+Right)"
                                 ++ "^ca(5,xdotool key super+Left)"
-                                ++ "^ca(1,xdotool key super+" ++ show (n) ++ ")"]
+                                ++ "^ca(1,xdotool key super+" ++ show n ++ ")"]
 -- -¬
 ------------------------------------------------------------------------
 -- Key bindings --¬
@@ -84,8 +82,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,xK_period), sendMessage (IncMasterN (-1)))
     -- Toggle fullscreen mode
     , ((modm,xK_f), sendMessage $ Toggle FULL)
-    -- Quit xmonad
-    , ((modShift,xK_q), io (exitWith ExitSuccess))
     -- Application spawning
     , ((modm,xK_Return), spawn $ XMonad.terminal conf)
     , ((modShift,xK_i) , spawn "google-chrome"       )
@@ -116,7 +112,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     where modShift  = modm .|. shiftMask
           dmenuCall = "dmenu_run -i -h 18"
                       ++ " -fn 'termsyn-8' "
-                      ++ " -sb '" ++ colLook Green 0 ++ "'"
+                      ++ " -sb '" ++ colLook Cyan 0 ++ "'"
                       ++ " -nb '#000000'"
 
 -- -¬
@@ -124,12 +120,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 -- Mouse bindings --¬
 ------------------------------------------------------------------------
 myMouseBindings :: XConfig t -> M.Map (KeyMask, Button) (Window -> X ())
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
+myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
+    [ ((modm, button1), \w -> focus w >> mouseMoveWindow w
+                                      >> windows W.shiftMaster)
+    , ((modm, button2), \w -> focus w >> windows W.shiftMaster)
+    , ((modm, button3), \w -> focus w >> mouseResizeWindow w
+                                      >> windows W.shiftMaster)
     ]
 -- -¬
 ------------------------------------------------------------------------
@@ -171,10 +167,10 @@ myLogHook ::  H.Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
         ppCurrent           =   dzenColor (colLook White 0)
-                                          (colLook Green 0) . pad
-      , ppVisible           =   dzenColor (colLook Blue  0)
+                                          (colLook Cyan  0) . pad
+      , ppVisible           =   dzenColor (colLook Cyan  0)
                                           (colLook Black 0) . pad
-      , ppHidden            =   dzenColor (colLook Green 0)
+      , ppHidden            =   dzenColor (colLook Cyan  0)
                                           (colLook BG    0) . pad
       , ppHiddenNoWindows   =   dzenColor (colLook BG    1)
                                           (colLook BG    0) . pad
@@ -182,7 +178,7 @@ myLogHook h = dynamicLogWithPP $ defaultPP
                                           (colLook BG    0) . pad
       , ppWsSep             =   ""
       , ppSep               =   " | "
-      , ppLayout            =   dzenColor (colLook Green 0) "#000000" .
+      , ppLayout            =   dzenColor (colLook Cyan 0) "#000000" .
             (\x -> case x of
                 "Spacing 20 Tall"        -> clickInLayout ++ icon1
                 "Tall"                   -> clickInLayout ++ icon2
@@ -221,15 +217,24 @@ colLook color n =
 
 colors :: ColorMap
 colors = M.fromList
-    [ (Black   , ("#393939","#121212"))
-    , (Red     , ("#DA3955","#FF4775"))
-    , (Green   , ("#308888","#53A6A6"))
-    , (Yellow  , ("#54777D","#348D9D"))
-    , (Blue    , ("#6D9CBE","#91C1E3"))
-    , (Magenta , ("#6F4484","#915EAA"))
-    , (Cyan    , ("#2B7694","#47959E"))
-    , (White   , ("#D6D6D6","#A3A3A3"))
-    , (BG      , ("#000000","#444444"))
+    [ (Black   , ("#393939",
+                  "#121212"))
+    , (Red     , ("#e60926",
+                  "#df2821"))
+    , (Green   , ("#219e74",
+                  "#219579"))
+    , (Yellow  , ("#218c7e",
+                  "#218383"))
+    , (Blue    , ("#217a88",
+                  "#21728d"))
+    , (Magenta , ("#216992",
+                  "#216097"))
+    , (Cyan    , ("#21579c",
+                  "#214ea1"))
+    , (White   , ("#D6D6D6",
+                  "#A3A3A3"))
+    , (BG      , ("#000000",
+                  "#444444"))
     ]
 -- -¬
 ------------------------------------------------------------------------
@@ -250,7 +255,7 @@ main = do
         keys                      = myKeys,
         mouseBindings             = myMouseBindings,
         logHook                   = myLogHook d,
-        layoutHook                = smartBorders(myLayout),
+        layoutHook                = smartBorders myLayout,
         manageHook                = myManageHook,
         handleEventHook           = FS.fullscreenEventHook,
         startupHook               = setWMName "LG3D"
@@ -261,11 +266,11 @@ main = do
           callDzen2 = "conky | dzen2 -x 500 -ta r -fn '"
                       ++ dzenFont
                       ++ "' -bg '#000000' -h 18 -e 'onnewinput=;button3='"
-          dzenFont  = "termsyn-8"
+          dzenFont  = "Inconsolata-8"
           -- | Layouts --¬
           myLayout = mkToggle (NOBORDERS ?? FULL ?? EOT) $
               avoidStruts $
-              webLayout $
+              webLayout
               standardLayout
               where
                   standardLayout = tiled
