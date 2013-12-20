@@ -14,7 +14,7 @@ scrollback_lines = 10000
 search_wrap = true
  
 # 0.0: opaque, 1.0: transparent
-transparency = 0.0
+transparency = 0.03
 pseudo_transparency = false
  
 # "system", "on" or "off"

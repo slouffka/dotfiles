@@ -16,7 +16,7 @@ synclient FingerLow=50 &
 synclient PalmDetect=1 &
 sleep 3 && stalonetray --geometry 1x1-1-1 --transparent true &
 mpd &
-xset +dpms
+xset -dpms
 xset dpms 0 0 300
 sleep 3 && conky -c ~/.conkympd &
 exec dbus-launch xmonad

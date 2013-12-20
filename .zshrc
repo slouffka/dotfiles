@@ -156,6 +156,7 @@ nls () {
 # Aliases --¬
 # ---------------------------------------------------------------------
 alias tmux="TERM=xterm-256color tmux"
+alias z="zathura"
 alias clc="clear"
 alias copy="rsync -aP"
 alias :q="exit"
@@ -169,7 +170,6 @@ alias fp="~/Scripts/pass/findpass"
 alias ep="~/Scripts/pass/editpass"
 alias ls="ls --group-directories-first --color=always"
 alias zsnes="optirun zsnes"
-alias steam="optirun steam"
 alias ftl="cd ~/Data/Games/SteamApps/common/FTL\ Faster\ Than\ Light/ && ./FTL && cd -"
 alias dwarves="cd ~/Dropbox/Programs/dwarves && ./dfhack && cd -"
 alias updates="pacman -Qqu"

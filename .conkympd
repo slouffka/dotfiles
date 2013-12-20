@@ -28,5 +28,5 @@ maximum_width 1300
 
 TEXT
 $if_mpd_playing
-${color #d6d6d6}${font tamsynmod-12}à${font termsyn-8}  $mpd_smart | $mpd_elapsed/$mpd_length
+${color #d6d6d6}${font Inconsolata-9}à${font termsyn-8}  $mpd_smart | $mpd_elapsed/$mpd_length
 $endif

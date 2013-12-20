@@ -142,7 +142,6 @@ myManageHook ::  ManageHook
 myManageHook = manageDocks <+> composeAll
     [ className =? "MPlayer"             --> doFloat
     , className =? "MPlayer"             --> doShift (myWorkspaces !! 2)
-    , className =? "Steam"               --> doFloat
     , className =? "Steam"               --> doShift (myWorkspaces !! 2)
     , className =? "Gimp"                --> doFloat
     , className =? "Gimp"                --> doShift (myWorkspaces !! 5)
