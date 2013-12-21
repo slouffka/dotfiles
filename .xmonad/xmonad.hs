@@ -84,7 +84,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,xK_f), sendMessage $ Toggle FULL)
     -- Application spawning
     , ((modm,xK_Return), spawn $ XMonad.terminal conf)
-    , ((modShift,xK_i) , spawn "google-chrome"       )
+    , ((modShift,xK_i) , spawn "google-chrome-stable"       )
     , ((modShift,xK_n) , spawn "nautilus"            )
     , ((modShift,xK_m) , spawn "urxvt -e ncmpcpp"    )
     , ((modm,xK_m)     , spawn "urxvt -e mutt"       )
@@ -110,9 +110,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         | (key, sc) <- zip [xK_a, xK_s, xK_d] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     where modShift  = modm .|. shiftMask
-          dmenuCall = "dmenu_run -i -h 18"
-                      ++ " -fn 'termsyn-8' "
-                      ++ " -sb '" ++ colLook Cyan 0 ++ "'"
+          dmenuCall = "dmenu_run -i -h 20 "
+                      ++ " -fn 'profont-8' "
+                      ++ " -sb '" ++ colLook Red 0 ++ "'"
                       ++ " -nb '#000000'"
 
 -- -¬
@@ -152,7 +152,7 @@ myManageHook = manageDocks <+> composeAll
     , className =? "Dwb"                 --> doShift (myWorkspaces !! 1)
     , className =? "Chromium"            --> doShift (myWorkspaces !! 1)
     , className =? "Firefox"             --> doShift (myWorkspaces !! 1)
-    , className =? "Google-chrome"       --> doShift (myWorkspaces !! 1)
+    , className =? "Google-chrome-stable"--> doShift (myWorkspaces !! 1)
     , className =? "Eclipse"             --> doShift (myWorkspaces !! 5)
     , className =? "Dwarf_Fortress"      --> doShift (myWorkspaces !! 2)
     , resource  =? "desktop_window"      --> doIgnore
@@ -264,7 +264,7 @@ main = do
     where callDzen1 = "dzen2 -ta l -fn '"
                       ++ dzenFont
                       ++ "' -bg '#000000' -y 0 -w 1366 -h 19 -e 'button3='"
-          callDzen2 = "conky| dzen2 -x 0 -y 2 -ta c -fn '"
+          callDzen2 = "sleep 1 && conky | dzen2 -x 0 -y 2 -ta c -fn '"
                      ++ dzenFont
                      ++ "' -bg '#000000' -h 18 -e 'onnewinput=;button3='"
           dzenFont  = "profont-6"
