@@ -33,12 +33,12 @@ import qualified XMonad.StackSet          as W
 -- Layout names and quick access keys --¬
 ------------------------------------------------------------------------
 myWorkspaces :: [String]
-myWorkspaces = clickable . map dzenEscape $ [ "I"
-                                            , "II"
-                                            , "III"
-                                            , "IV"
-                                            , "V"
-                                            , "VI"
+myWorkspaces = clickable . map dzenEscape $ [ "                                            "
+                                            , "                                            "
+                                            , "                                            "
+                                            , "                                            "
+                                            , "                                            "
+                                            , "                                            "
                                             ]
     where clickable l = [ x ++ ws ++ "^ca()^ca()^ca()" |
                         (i,ws) <- zip "123qwe" l,
@@ -162,21 +162,23 @@ myManageHook = manageDocks <+> composeAll
 ------------------------------------------------------------------------
 -- Status bars and logging --¬
 ------------------------------------------------------------------------
+
 myLogHook ::  H.Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
         ppCurrent           =   dzenColor (colLook White 0)
-                                          (colLook Cyan  0) . pad
+                                          (colLook Red  0) . pad
       , ppVisible           =   dzenColor (colLook Cyan  0)
                                           (colLook Black 0) . pad
       , ppHidden            =   dzenColor (colLook Cyan  0)
-                                          (colLook BG    0) . pad
-      , ppHiddenNoWindows   =   dzenColor (colLook BG    1)
-                                          (colLook BG    0) . pad
+                                          (colLook Cyan  1) . pad
+      , ppHiddenNoWindows   =   dzenColor (colLook BG    0)
+                                          (colLook Black 0) . pad
       , ppUrgent            =   dzenColor (colLook Red   0)
                                           (colLook BG    0) . pad
       , ppWsSep             =   ""
       , ppSep               =   " | "
+      , ppOrder             =   \(ws:_:_:_) -> [ws]
       , ppLayout            =   dzenColor (colLook Cyan 0) "#000000" .
             (\x -> case x of
                 "Spacing 20 Tall"        -> clickInLayout ++ icon1
@@ -220,16 +222,16 @@ colors = M.fromList
                   "#121212"))
     , (Red     , ("#e60926",
                   "#df2821"))
-    , (Green   , ("#219e74",
-                  "#219579"))
-    , (Yellow  , ("#218c7e",
-                  "#218383"))
-    , (Blue    , ("#217a88",
-                  "#21728d"))
-    , (Magenta , ("#216992",
-                  "#216097"))
-    , (Cyan    , ("#21579c",
-                  "#214ea1"))
+    , (Green   , ("#308888",
+                  "#53A6A6"))
+    , (Yellow  , ("#54777d",
+                  "#348d9d"))
+    , (Blue    , ("#6d9cbe",
+                  "#91C1E3"))
+    , (Magenta , ("#6f4484",
+                  "#915eaa"))
+    , (Cyan    , ("#2B7694",
+                  "#47959E"))
     , (White   , ("#D6D6D6",
                   "#A3A3A3"))
     , (BG      , ("#000000",
@@ -261,11 +263,11 @@ main = do
     }
     where callDzen1 = "dzen2 -ta l -fn '"
                       ++ dzenFont
-                      ++ "' -bg '#000000' -w 500 -h 18 -e 'button3='"
-          callDzen2 = "conky | dzen2 -x 500 -ta r -fn '"
-                      ++ dzenFont
-                      ++ "' -bg '#000000' -h 18 -e 'onnewinput=;button3='"
-          dzenFont  = "Inconsolata-8"
+                      ++ "' -bg '#000000' -y 0 -w 1366 -h 19 -e 'button3='"
+          callDzen2 = "conky| dzen2 -x 0 -y 2 -ta c -fn '"
+                     ++ dzenFont
+                     ++ "' -bg '#000000' -h 18 -e 'onnewinput=;button3='"
+          dzenFont  = "profont-6"
           -- | Layouts --¬
           myLayout = mkToggle (NOBORDERS ?? FULL ?? EOT) $
               avoidStruts $

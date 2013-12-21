@@ -9,12 +9,12 @@ allow_bold = false
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Inconsolata 9.5
+font = Inconsolata 9
 scrollback_lines = 10000
 search_wrap = true
  
 # 0.0: opaque, 1.0: transparent
-transparency = 0.03
+transparency = 0.05
 pseudo_transparency = false
  
 # "system", "on" or "off"
