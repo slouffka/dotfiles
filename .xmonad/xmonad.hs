@@ -83,12 +83,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Toggle fullscreen mode
     , ((modm,xK_f), sendMessage $ Toggle FULL)
     -- Application spawning
-    , ((modm,xK_Return), spawn $ XMonad.terminal conf)
-    , ((modShift,xK_i) , spawn "google-chrome-stable"       )
-    , ((modShift,xK_n) , spawn "nautilus"            )
-    , ((modShift,xK_m) , spawn "urxvt -e ncmpcpp"    )
-    , ((modm,xK_m)     , spawn "urxvt -e mutt"       )
-    , ((modShift,xK_r) , spawn "killall dzen2; xmonad --recompile; xmonad --restart")
+    , ((modm      , xK_Return) , spawn $ XMonad.terminal conf )
+    , ((modm      , xK_i)      , spawn "dwb"                  )
+    , ((modShift  , xK_i)      , spawn "google-chrome-stable" )
+    , ((modShift  , xK_n)      , spawn "nautilus"             )
+    , ((modShift  , xK_m)      , spawn "urxvt -e ncmpcpp"     )
+    , ((modm      , xK_m)      , spawn "urxvt -e mutt"        )
+    , ((modShift  , xK_r)      , spawn "killall dzen2; xmonad --recompile; xmonad --restart")
     -- Alsa Multimedia Control
     , ((0, 0x1008ff11), spawn "/home/alex/.xmonad/Scripts/volctl down"  )
     , ((0, 0x1008ff13), spawn "/home/alex/.xmonad/Scripts/volctl up"    )

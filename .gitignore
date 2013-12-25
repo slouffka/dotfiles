@@ -18,3 +18,4 @@
 .weechat/weechat.log
 .weechat/wg.conf
 .weechat/xfer.conf
+.weechat/sec.conf
