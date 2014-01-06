@@ -26,6 +26,7 @@ export PATH=$PATH:~/Scripts/mail
 export PATH=$PATH:~/Scripts/tmux
 export PATH=$PATH:~/.gem/ruby/2.0.0/bin
 export PATH=$PATH:~/.cabal/bin
+export PATH=$PATH:~/Data/Programs/ADT/sdk/platform-tools
 # -¬
 # ---------------------------------------------------------------------
 # Linux terminal colors --¬

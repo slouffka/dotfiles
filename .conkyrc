@@ -12,6 +12,13 @@ TEXT
 # -------------------------------------------------------------------------- 
 ^fg(\#393939)\
 ^fg()\
+${execi 1 /home/alex/.xmonad/Scripts/netinfo}\
+^fg(\#393939) \
+# -------------------------------------------------------------------------- 
+# Network Usage
+# -------------------------------------------------------------------------- 
+^fg(\#393939)\
+:: ^fg()\
 ^i(/home/alex/.xmonad/dzen/icons/xbm8x8/net_down_03.xbm)\
  ${downspeedf wlp4s0} \
 ^i(/home/alex/.xmonad/dzen/icons/xbm8x8/net_up_03.xbm) ${upspeedf wlp4s0}\

@@ -14,7 +14,7 @@ syndaemon -k -i 1 -d -t &
 synclient FingerHigh=50 &
 synclient FingerLow=50 &
 synclient PalmDetect=1 &
-sleep 3 && stalonetray --geometry 1x1-1-1 --transparent true &
+trayer --edge bottom --align right --SetDockType true --SetPartialStrut false --expand true --width 18 --height 22 --transparent true --alpha 255 & 
 mpd &
 sleep 3 && conky -c ~/.conkympd &
 exec dbus-launch xmonad
