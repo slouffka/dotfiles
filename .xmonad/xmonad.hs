@@ -145,6 +145,7 @@ myManageHook = manageDocks <+> composeAll
     , className =? "MPlayer"             --> doShift (myWorkspaces !! 2)
     , className =? "Steam"               --> doShift (myWorkspaces !! 2)
     , className =? "Gimp"                --> doFloat
+    , className =? "Vlc"                 --> doFloat
     , className =? "Gimp"                --> doShift (myWorkspaces !! 5)
     , title     =? "MATLAB R2013a"       --> doShift (myWorkspaces !! 5)
     , className =? "Nautilus"            --> doShift (myWorkspaces !! 3)
@@ -168,11 +169,11 @@ myLogHook ::  H.Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
         ppCurrent           =   dzenColor (colLook White 0)
-                                          (colLook Red  0) . pad
-      , ppVisible           =   dzenColor (colLook Cyan  0)
+                                          (colLook Red   0) . pad
+      , ppVisible           =   dzenColor (colLook Blue  0)
                                           (colLook Black 0) . pad
-      , ppHidden            =   dzenColor (colLook Cyan  0)
-                                          (colLook Cyan  1) . pad
+      , ppHidden            =   dzenColor (colLook Blue  0)
+                                          (colLook Blue  1) . pad
       , ppHiddenNoWindows   =   dzenColor (colLook BG    0)
                                           (colLook Black 0) . pad
       , ppUrgent            =   dzenColor (colLook Red   0)
@@ -228,7 +229,7 @@ colors = M.fromList
     , (Yellow  , ("#F4F29F",
                   "#F4E383"))
     , (Blue    , ("#212C40",
-                  "#141A26"))
+                  "#38496B"))
     , (Magenta , ("#F15582",
                   "#EA2E81"))
     , (Cyan    , ("#2F6FA1",

@@ -14,7 +14,7 @@ scrollback_lines = 10000
 search_wrap = true
  
 # 0.0: opaque, 1.0: transparent
-transparency = 0.05
+transparency = 0.1
 pseudo_transparency = false
  
 # "system", "on" or "off"
@@ -135,7 +135,7 @@ color3  = #F4F29F
 color11 = #F4E383
 # Blue
 color4  = #212C40
-color12 = #141A26
+color12 = #38496B
 # Magenta
 color5  = #F15582
 color13 = #EA2E81
