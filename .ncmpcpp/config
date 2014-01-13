@@ -93,8 +93,8 @@ song_status_format = "{{$b$3%a$/b$1 $/b» {$6%b}$1 $/b» }{$2%t}}|{%f}$8"
 ## with reversed colors.
 ##
 
-alternative_header_first_line_format = "[ $b$2{%t}|{%f}$9 ]"
-alternative_header_second_line_format = "{{$b$3%a$9}{ $6%b$9}{ ($4)}}|{%D}"
+alternative_header_first_line_format = "$b$7{%t}|{%f}$9"
+alternative_header_second_line_format = "{{$b$3%a$9}{ • $6%b$9}{ ($4)}}|{%D}"
 
 ## Note: Below variables also supports
 ## text attributes listed above.
@@ -171,9 +171,9 @@ incremental_seeking = "yes"
 seek_time = "1"
 autocenter_mode = "yes"
 centered_cursor = "yes"
-progressbar_look = "─╸ "
+progressbar_look = "── "
 default_place_to_search_in = "database" (database/playlist)
-user_interface = "classic" (classic/alternative)
+user_interface = "alternative" (classic/alternative)
 default_space_mode = "select" (add/select)
 #default_tag_editor_left_col = "albums" (albums/dirs)
 #default_tag_editor_pattern = "%n - %t"

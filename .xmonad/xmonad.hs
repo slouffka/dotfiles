@@ -53,8 +53,11 @@ myWorkspaces = clickable . map dzenEscape $ [ "                                 
 myKeys ::  XConfig l -> M.Map (KeyMask, KeySym) (X ())
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [
-    -- launch dmenu
+    -- Launch applications through dmenu
       ((modm,xK_r), spawn dmenuCall)
+    -- Control mpd music through dmenu
+    , ((modm,xK_p), spawn "/home/alex/Scripts/dmpd")
+    , ((modShift,xK_p), spawn "/home/alex/Scripts/dmpd --control")
     -- Close focused window
     , ((modShift,xK_c), kill)
      -- Rotate through the available layout algorithms
@@ -87,8 +90,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm      , xK_i)      , spawn "dwb"                  )
     , ((modShift  , xK_i)      , spawn "google-chrome-stable" )
     , ((modShift  , xK_n)      , spawn "nautilus"             )
-    , ((modShift  , xK_m)      , spawn "urxvt -e ncmpcpp"     )
-    , ((modm      , xK_m)      , spawn "urxvt -e mutt"        )
+    , ((modm      , xK_m)      , spawn "termite -e ncmpcpp"     )
+    , ((modShift  , xK_m)      , spawn "termite -e mutt"        )
     , ((modShift  , xK_r)      , spawn "killall dzen2; xmonad --recompile; xmonad --restart")
     -- Alsa Multimedia Control
     , ((0, 0x1008ff11), spawn "/home/alex/.xmonad/Scripts/volctl down"  )
@@ -151,7 +154,6 @@ myManageHook = manageDocks <+> composeAll
     , className =? "Nautilus"            --> doShift (myWorkspaces !! 3)
     , className =? "File-roller"         --> doShift (myWorkspaces !! 3)
     , className =? "Zathura"             --> doShift (myWorkspaces !! 4)
-    , className =? "Dwb"                 --> doShift (myWorkspaces !! 1)
     , className =? "Chromium"            --> doShift (myWorkspaces !! 1)
     , className =? "Firefox"             --> doShift (myWorkspaces !! 1)
     , className =? "Google-chrome-stable"--> doShift (myWorkspaces !! 1)
@@ -222,18 +224,18 @@ colors :: ColorMap
 colors = M.fromList
     [ (Black   , ("#393939",
                   "#121212"))
-    , (Red     , ("#F24C4C",
-                  "#F21B4C"))
-    , (Green   , ("#A4A482",
-                  "#8A9D82"))
-    , (Yellow  , ("#F4F29F",
-                  "#F4E383"))
-    , (Blue    , ("#212C40",
-                  "#38496B"))
-    , (Magenta , ("#F15582",
-                  "#EA2E81"))
-    , (Cyan    , ("#2F6FA1",
-                  "#214ea1"))
+    , (Red     , ("#c90c25",
+                  "#F21835"))
+    , (Green   , ("#2a5b6a",
+                  "#2f4c6a"))
+    , (Yellow  , ("#54777d",
+                  "#415D62"))
+    , (Blue    , ("#5c5dad",
+                  "#5063ab"))
+    , (Magenta , ("#6f4484",
+                  "#915eaa"))
+    , (Cyan    , ("#2B7694",
+                  "#47959E"))
     , (White   , ("#D6D6D6",
                   "#A3A3A3"))
     , (BG      , ("#000000",
@@ -250,7 +252,7 @@ main = do
     xmonad $ defaultConfig {
         terminal                  = "termite",
         focusFollowsMouse         = True,
-        borderWidth               = 3,
+        borderWidth               = 2,
         modMask                   = mod4Mask,
         normalBorderColor         = colLook Black 1,
         focusedBorderColor        = colLook Cyan 0,

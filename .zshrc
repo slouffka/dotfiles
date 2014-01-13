@@ -12,7 +12,11 @@ DISABLE_AUTO_UPDATE="true"
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="prompto"
 setterm -bfreq 0
-# -¬
+plugins=(git archlinux pip systemd zsh-syntax-highlighting vi-mode)
+source $ZSH/oh-my-zsh.sh
+bindkey '^R' history-incremental-pattern-search-backward
+export KEYTIMEOUT=1
+#-¬
 # ---------------------------------------------------------------------
 # Exports --¬
 # ---------------------------------------------------------------------
@@ -20,12 +24,12 @@ export EDITOR=vim
 export NOTEDIR=~/.notes/
 export NETHACKOPTIONS="autoquiver,!autopickup,name:Alex,DECgraphics,color,race:human,showexp,hilite_pet"
 export JAVA_FONTS=/usr/share/fonts/TTF
+export PATH=~/.cabal/bin:$PATH
 export PATH=$PATH:~/Scripts
 export PATH=$PATH:~/Scripts/peat
 export PATH=$PATH:~/Scripts/mail
 export PATH=$PATH:~/Scripts/tmux
 export PATH=$PATH:~/.gem/ruby/2.0.0/bin
-export PATH=$PATH:~/.cabal/bin
 export PATH=$PATH:~/Data/Programs/ADT/sdk/platform-tools
 # -¬
 # ---------------------------------------------------------------------
@@ -124,9 +128,6 @@ eval $( dircolors -b $HOME/.dircolors )
     #git-svn-dcommit-push    git svn dcommit && git push github master:svntrunk
     #gpa git add .; git commit -m "$1"; git push; # only in the ocodo fork.
 
-plugins=(git archlinux pip supervisor systemd zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
 # -¬
 # ---------------------------------------------------------------------
 # Functions --¬
@@ -175,6 +176,7 @@ alias ftl="cd ~/Data/Games/SteamApps/common/FTL\ Faster\ Than\ Light/ && ./FTL &
 alias dwarves="cd ~/Dropbox/Programs/dwarves && ./dfhack && cd -"
 alias updates="pacman -Qqu"
 alias netrestart="sudo netctl-auto stop wlp4s0 && sudo netctl-auto start wlp4s0"
+alias ssh="export TERM='xterm-256color'; ssh"
 #fortune | cowsay | lolcat
 # -¬
 # ---------------------------------------------------------------------

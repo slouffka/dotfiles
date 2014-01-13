@@ -217,6 +217,10 @@ macro index <F6> \
       "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
       "notmuch: remove message from inbox"
 # -¬
+#    Encryption --¬
+bind compose p  pgp-menu
+macro compose Y pfy "send mail without GPG"
+# -¬
 #
 #  -----------------------------------------------------------------
 #  -¬
@@ -226,5 +230,14 @@ macro index <F6> \
 #  HTML
 auto_view text/html                                      # view html automatically
 alternative_order text/plain text/enriched text/html     # save html for last
+# -¬
+#  -----------------------------------------------------------------
+#  Encryption -----------------------------------------------------¬
+#  -----------------------------------------------------------------
+source /usr/share/doc/mutt/samples/gpg.rc
+set pgp_timeout = 3600
+set crypt_autosign = yes
+set crypt_replyencrypt = yes
+set pgp_sign_as = 90F07D0C 
 # -¬
 #  -----------------------------------------------------------------
