@@ -12,7 +12,7 @@ DISABLE_AUTO_UPDATE="true"
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="prompto"
 setterm -bfreq 0
-plugins=(git archlinux pip systemd zsh-syntax-highlighting vi-mode)
+plugins=(git archlinux zsh-syntax-highlighting vi-mode)
 source $ZSH/oh-my-zsh.sh
 bindkey '^R' history-incremental-pattern-search-backward
 export KEYTIMEOUT=1
@@ -24,11 +24,16 @@ export EDITOR=vim
 export NOTEDIR=~/.notes/
 export NETHACKOPTIONS="autoquiver,!autopickup,name:Alex,DECgraphics,color,race:human,showexp,hilite_pet"
 export JAVA_FONTS=/usr/share/fonts/TTF
+# -¬
+# ---------------------------------------------------------------------
+# Paths --¬
+# ---------------------------------------------------------------------
 export PATH=~/.cabal/bin:$PATH
 export PATH=$PATH:~/Scripts
 export PATH=$PATH:~/Scripts/peat
 export PATH=$PATH:~/Scripts/mail
 export PATH=$PATH:~/Scripts/tmux
+export PATH=$PATH:~/Scripts/pms
 export PATH=$PATH:~/.gem/ruby/2.0.0/bin
 export PATH=$PATH:~/Data/Programs/ADT/sdk/platform-tools
 # -¬
@@ -39,99 +44,29 @@ if [[ "$TERM" = "linux" ]]; then
 
     echo -en "\e]P0050505"
     echo -en "\e]P8121212"
-    echo -en "\e]P1DA4939"
-    echo -en "\e]P9FF6C5C"
-    echo -en "\e]P261C29A"
-    echo -en "\e]PA509F7E"
-    echo -en "\e]P3DB8D4D"
-    echo -en "\e]PBBC9458"
-    echo -en "\e]P46D9CBE"
-    echo -en "\e]PC91C1E3"
-    echo -en "\e]P55E468C"
-    echo -en "\e]PD7F62B3"
-    echo -en "\e]P6435D75"
-    echo -en "\e]PE6E98A4"
-    echo -en "\e]P7DEDEDE"
-    echo -en "\e]PFB0B0B0"
+    echo -en "\e]P1c90c25"
+    echo -en "\e]P9F21835"
+    echo -en "\e]P22a5b6a"
+    echo -en "\e]PA2f4c6a"
+    echo -en "\e]P354777d"
+    echo -en "\e]PB415D62"
+    echo -en "\e]P45c5dad"
+    echo -en "\e]PC5063ab"
+    echo -en "\e]P56f4484"
+    echo -en "\e]PD915eaa"
+    echo -en "\e]P62B7694"
+    echo -en "\e]PE47959E"
+    echo -en "\e]P7D6D6D6"
+    echo -en "\e]PFA3A3A3"
     clear 
 
 fi
 eval $( dircolors -b $HOME/.dircolors )
 # -¬
 # ---------------------------------------------------------------------
-# Archlinux Plugin Documentation --¬
-# ---------------------------------------------------------------------
-    #pacin='sudo pacman -S'
-    #Install specific package not from the repositories but from a file
-
-    #pacins='sudo pacman -U'          
-    #Remove the specified package(s), retaining its configuration(s) and required dependencies
-
-    #pacre='sudo pacman -R'           
-    #Remove the specified package(s), its configuration(s) and unneeded dependencies
-
-    #pacrem='sudo pacman -Rns'        
-    #Display information about a given package in the repositories
-
-    #pacrep='pacman -Si'              
-    #Search for package(s) in the repositories
-
-    #pacreps='pacman -Ss'             
-    #Display information about a given package in the local database
-
-    #pacloc='pacman -Qi'              
-    #Search for package(s) in the local database
-
-    #paclocs='pacman -Qs'
-    #Update and refresh the local package and ABS databases against repositories
-
-    #pacupd='sudo pacman -Sy && sudo abs'     
-    #Install given package(s) as dependencies of another package
-
-    #pacinsd='sudo pacman -S --asdeps'        
-    #Force refresh of all package lists after updating /etc/pacman.d/mirrorlist
-
-    #pacmir='sudo pacman -Syy'
-    #Extra functions for package management in Archlinux
-
-    #List all installed packages with a short description - Source
-
-    #paclist
-    #List all orphaned packages
-
-    #paclsorphans
-    #Delete all orphaned packages
-
-    #pacrmorphans
-    #List all disowned files in your system
-
-    #pacdisowned | less +F
-
-# -¬
-# ---------------------------------------------------------------------
-# Github Plugin Documentation --¬
-# ---------------------------------------------------------------------
-    #g   git                                   | gst git status
-    #gl  git pull                              | gup git fetch && git rebase
-    #gp  git push                              | gc  git commit -v
-    #gca git commit -v -a                      | gco git checkout
-    #gcm git checkout master                   | gb  git branch
-    #gba git branch -a                         | gcount  git shortlog -sn
-    #gcp git cherry-pick                       | glg git log --stat --max-count=5
-    #glgg    git log --graph --max-count=5     | gss git status -s
-    #ga  git add                               | gm  git merge
-    #grh git reset HEAD                        | grhh    git reset HEAD --hard
-    #gsr git svn rebase                        | gsd git svn dcommit
-    #ggpull  git pull origin $(current_branch) | ggpush  git push origin $(current_branch)
-    #gdv git diff -w "$@"                      | view -
-    #ggpnp   git pull origin $(current_branch) && git push origin $(current_branch)
-    #git-svn-dcommit-push    git svn dcommit && git push github master:svntrunk
-    #gpa git add .; git commit -m "$1"; git push; # only in the ocodo fork.
-
-# -¬
-# ---------------------------------------------------------------------
 # Functions --¬
 # ---------------------------------------------------------------------
+# Search in wikipedia from the command line
 wiki() { dig +short txt $1.wp.dg.cx; }
 
 # Note taking
@@ -153,6 +88,31 @@ nls () {
         }
     }'
 ;}
+
+# Color man pages
+man() {
+    env LESS_TERMCAP_mb=$'\E[01;0m' \
+    LESS_TERMCAP_md=$'\E[01;38;5;6m' \
+    LESS_TERMCAP_me=$'\E[0m' \
+    LESS_TERMCAP_se=$'\E[0m' \
+    LESS_TERMCAP_so=$'\E[38;5;9m' \
+    LESS_TERMCAP_ue=$'\E[0m' \
+    LESS_TERMCAP_us=$'\E[04;38;5;2m' \
+    man "$@"
+}
+
+# Use Google's text to speech synthesis to play phrases from the cmd line
+say() { 
+        # limit to 100 character or less
+        # language code: http://developers.google.com/translate/v2/using_rest#language-params
+        # useage: say <language code> <phase>
+        # example: say es come with me
+        # Original file:
+        # https://github.com/gotbletu/shownotes/blob/master/google_text_to_speech.txt
+        mplayer -user-agent Mozilla \
+        "http://translate.google.com/translate_tts?ie=UTF-8&tl="$1"&q=$(echo "$@" \
+        | cut -d ' ' -f2- | sed 's/ /\+/g')" > /dev/null 2>&1 ;}
+
 # -¬
 # ---------------------------------------------------------------------
 # Aliases --¬
@@ -170,6 +130,7 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 alias fp="~/Scripts/pass/findpass"
 alias ep="~/Scripts/pass/editpass"
+alias l="ls++"
 alias ls="ls --group-directories-first --color=always"
 alias zsnes="optirun zsnes"
 alias ftl="cd ~/Data/Games/SteamApps/common/FTL\ Faster\ Than\ Light/ && ./FTL && cd -"
@@ -177,6 +138,6 @@ alias dwarves="cd ~/Dropbox/Programs/dwarves && ./dfhack && cd -"
 alias updates="pacman -Qqu"
 alias netrestart="sudo netctl-auto stop wlp4s0 && sudo netctl-auto start wlp4s0"
 alias ssh="export TERM='xterm-256color'; ssh"
-#fortune | cowsay | lolcat
+# If you use this you are definitely insane: fortune | cowsay | lolcat
 # -¬
 # ---------------------------------------------------------------------
