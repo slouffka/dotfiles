@@ -252,10 +252,10 @@ main = do
     xmonad $ defaultConfig {
         terminal                  = "termite",
         focusFollowsMouse         = True,
-        borderWidth               = 2,
+        borderWidth               = 4,
         modMask                   = mod4Mask,
         normalBorderColor         = colLook Black 1,
-        focusedBorderColor        = colLook Cyan 0,
+        focusedBorderColor        = colLook White 0,
         workspaces                = myWorkspaces,
         keys                      = myKeys,
         mouseBindings             = myMouseBindings,
