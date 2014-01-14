@@ -16,6 +16,8 @@ plugins=(git archlinux zsh-syntax-highlighting vi-mode)
 source $ZSH/oh-my-zsh.sh
 bindkey '^R' history-incremental-pattern-search-backward
 export KEYTIMEOUT=1
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+
 #-¬
 # ---------------------------------------------------------------------
 # Exports --¬
