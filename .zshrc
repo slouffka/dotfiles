@@ -16,7 +16,7 @@ plugins=(git archlinux zsh-syntax-highlighting vi-mode)
 source $ZSH/oh-my-zsh.sh
 bindkey '^R' history-incremental-pattern-search-backward
 export KEYTIMEOUT=1
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern )
 
 #-¬
 # ---------------------------------------------------------------------
@@ -36,6 +36,7 @@ export PATH=$PATH:~/Scripts/peat
 export PATH=$PATH:~/Scripts/mail
 export PATH=$PATH:~/Scripts/tmux
 export PATH=$PATH:~/Scripts/pms
+export PATH=$PATH:~/.local/bin
 export PATH=$PATH:~/.gem/ruby/2.0.0/bin
 export PATH=$PATH:~/Data/Programs/ADT/sdk/platform-tools
 # -¬
@@ -140,6 +141,8 @@ alias dwarves="cd ~/Dropbox/Programs/dwarves && ./dfhack && cd -"
 alias updates="pacman -Qqu"
 alias netrestart="sudo netctl-auto stop wlp4s0 && sudo netctl-auto start wlp4s0"
 alias ssh="export TERM='xterm-256color'; ssh"
+alias whosfat="du --max-depth=1 -h | sort --ignore-case --reverse -h | head -10"
+alias cam="mplayer tv://"
 # If you use this you are definitely insane: fortune | cowsay | lolcat
 # -¬
 # ---------------------------------------------------------------------

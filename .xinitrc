@@ -17,4 +17,7 @@ synclient PalmDetect=1 &
 trayer --edge bottom --align right --SetDockType true --SetPartialStrut false --expand true --width 18 --height 22 --transparent true --alpha 255 & 
 mpd &
 sleep 3 && conky -c ~/.conkympd &
+xset -dpms &
+xset dpms 0 0 0 &
+xset s off &
 exec dbus-launch xmonad

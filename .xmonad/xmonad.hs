@@ -33,15 +33,18 @@ import qualified XMonad.StackSet          as W
 -- Layout names and quick access keys --¬
 ------------------------------------------------------------------------
 myWorkspaces :: [String]
-myWorkspaces = clickable . map dzenEscape $ [ "                                            "
-                                            , "                                            "
-                                            , "                                            "
-                                            , "                                            "
-                                            , "                                            "
-                                            , "                                            "
+myWorkspaces = clickable . map dzenEscape $ [ "                             "
+                                            , "                            "
+                                            , "                            "
+                                            , "                            "
+                                            , "                             "
+                                            , "                            "
+                                            , "                            "
+                                            , "                            "
+                                            , "                             "
                                             ]
     where clickable l = [ x ++ ws ++ "^ca()^ca()^ca()" |
-                        (i,ws) <- zip "123qwe" l,
+                        (i,ws) <- zip "123qweasd" l,
                         let n = i
                             x =    "^ca(4,xdotool key super+Right)"
                                 ++ "^ca(5,xdotool key super+Left)"
@@ -98,25 +101,25 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, 0x1008ff13), spawn "/home/alex/.xmonad/Scripts/volctl up"    )
     , ((0, 0x1008ff12), spawn "/home/alex/.xmonad/Scripts/volctl toggle")
     -- Brightness Control
-    , ((0, 0x1008ff03), spawn "xbacklight -dec 20")
-    , ((0, 0x1008ff02), spawn "xbacklight -inc 20")
+    , ((0, 0x1008ff03), spawn "xbacklight -dec 10")
+    , ((0, 0x1008ff02), spawn "xbacklight -inc 10")
     ]
     ++
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1,xK_2,xK_3,xK_q,xK_w,xK_e]
+        | (i, k) <- zip (XMonad.workspaces conf) [xK_1,xK_2,xK_3,xK_q,xK_w,xK_e,xK_a,xK_s,xK_d]
         , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     ++
     -- mod-{w,e,r}, Switch to physical/Xinerama screens 1, 2, or 3
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_a, xK_s, xK_d] [0..]
+        | (key, sc) <- zip [xK_4, xK_5, xK_6] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     where modShift  = modm .|. shiftMask
           dmenuCall = "dmenu_run -i -h 20 "
                       ++ " -fn 'profont-8' "
-                      ++ " -sb '" ++ colLook Red 0 ++ "'"
+                      ++ " -sb '" ++ colLook White 1 ++ "'"
                       ++ " -nb '#000000'"
 
 -- -¬
@@ -145,7 +148,8 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList
 myManageHook ::  ManageHook
 myManageHook = manageDocks <+> composeAll
     [ className =? "MPlayer"             --> doFloat
-    , className =? "MPlayer"             --> doShift (myWorkspaces !! 2)
+    , className =? "MPlayer"             --> doShift (myWorkspaces !! 8)
+    , className =? "xbmc.bin"            --> doShift (myWorkspaces !! 8)
     , className =? "Steam"               --> doShift (myWorkspaces !! 2)
     , className =? "Gimp"                --> doFloat
     , className =? "Vlc"                 --> doFloat
@@ -171,13 +175,13 @@ myLogHook ::  H.Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
         ppCurrent           =   dzenColor (colLook White 0)
-                                          (colLook Red   0) . pad
+                                          (colLook White   0) . pad
       , ppVisible           =   dzenColor (colLook Blue  0)
-                                          (colLook Black 0) . pad
+                                          (colLook Black 1) . pad
       , ppHidden            =   dzenColor (colLook Blue  0)
-                                          (colLook Blue  1) . pad
+                                          (colLook Black  0) . pad
       , ppHiddenNoWindows   =   dzenColor (colLook BG    0)
-                                          (colLook Black 0) . pad
+                                          (colLook Black 1) . pad
       , ppUrgent            =   dzenColor (colLook Red   0)
                                           (colLook BG    0) . pad
       , ppWsSep             =   ""
@@ -274,14 +278,15 @@ main = do
           dzenFont  = "profont-6"
           -- | Layouts --¬
           myLayout = mkToggle (NOBORDERS ?? FULL ?? EOT) $
-              avoidStruts $
-              webLayout
+              onWorkspace (myWorkspaces !! 1) webLayout   $
+              onWorkspace (myWorkspaces !! 8) mediaLayout $
               standardLayout
               where
-                  standardLayout = tiled
+                  mediaLayout    = FS.fullscreenFull Full
+                  standardLayout = avoidStruts $ tiled
                                    ||| focused
                                    ||| fullTiled
-                  webLayout      = onWorkspace (myWorkspaces !! 1) $ fullTiled
+                  webLayout      = avoidStruts $ fullTiled
                                    ||| tiled
                                    ||| mirrorTiled
                   fullTiled      = Tall nmaster delta (1/4)
