@@ -2,7 +2,7 @@
 #
 #     .zshrc 
 #     Author: Alex Sánchez <kniren@gmail.com>
-#     Source: https://github.com/kniren/dotfiles/blob/master/.zshrc
+#     Source: https://github.com/kniren/dotfiles
 #
 # ------------------------------------------------------------------
 # ---------------------------------------------------------------------
@@ -19,53 +19,6 @@ export KEYTIMEOUT=1
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern )
 
 #-¬
-# ---------------------------------------------------------------------
-# Exports --¬
-# ---------------------------------------------------------------------
-export EDITOR=vim
-export NOTEDIR=~/.notes/
-export NETHACKOPTIONS="autoquiver,!autopickup,name:Alex,DECgraphics,color,race:human,showexp,hilite_pet"
-export JAVA_FONTS=/usr/share/fonts/TTF
-# -¬
-# ---------------------------------------------------------------------
-# Paths --¬
-# ---------------------------------------------------------------------
-export PATH=~/.cabal/bin:$PATH
-export PATH=$PATH:~/Scripts
-export PATH=$PATH:~/Scripts/peat
-export PATH=$PATH:~/Scripts/mail
-export PATH=$PATH:~/Scripts/tmux
-export PATH=$PATH:~/Scripts/pms
-export PATH=$PATH:~/.local/bin
-export PATH=$PATH:~/.gem/ruby/2.0.0/bin
-export PATH=$PATH:~/Data/Programs/ADT/sdk/platform-tools
-# -¬
-# ---------------------------------------------------------------------
-# Linux terminal colors --¬
-# ---------------------------------------------------------------------
-if [[ "$TERM" = "linux" ]]; then
-
-    echo -en "\e]P0050505"
-    echo -en "\e]P8121212"
-    echo -en "\e]P1c90c25"
-    echo -en "\e]P9F21835"
-    echo -en "\e]P22a5b6a"
-    echo -en "\e]PA2f4c6a"
-    echo -en "\e]P354777d"
-    echo -en "\e]PB415D62"
-    echo -en "\e]P45c5dad"
-    echo -en "\e]PC5063ab"
-    echo -en "\e]P56f4484"
-    echo -en "\e]PD915eaa"
-    echo -en "\e]P62B7694"
-    echo -en "\e]PE47959E"
-    echo -en "\e]P7D6D6D6"
-    echo -en "\e]PFA3A3A3"
-    clear 
-
-fi
-eval $( dircolors -b $HOME/.dircolors )
-# -¬
 # ---------------------------------------------------------------------
 # Functions --¬
 # ---------------------------------------------------------------------
@@ -131,15 +84,9 @@ alias :E="vim"
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
-alias fp="~/Scripts/pass/findpass"
-alias ep="~/Scripts/pass/editpass"
-alias l="ls++"
+alias l="ls -lah"
 alias ls="ls --group-directories-first --color=always"
-alias zsnes="optirun zsnes"
-alias ftl="cd ~/Data/Games/SteamApps/common/FTL\ Faster\ Than\ Light/ && ./FTL && cd -"
-alias dwarves="cd ~/Dropbox/Programs/dwarves && ./dfhack && cd -"
 alias updates="pacman -Qqu"
-alias netrestart="sudo netctl-auto stop wlp4s0 && sudo netctl-auto start wlp4s0"
 alias ssh="export TERM='xterm-256color'; ssh"
 alias whosfat="du --max-depth=1 -h | sort --ignore-case --reverse -h | head -10"
 alias cam="mplayer tv://"

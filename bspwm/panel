@@ -1,0 +1,26 @@
+#!/bin/bash
+
+PANEL_HEIGHT=20
+PANEL_FIFO=/tmp/panelfifo
+PANEL_FONT_FAMILY="-*-profont-medium-r-normal-*-12-*-*-*-c-*-*-1"
+
+. panel_colors
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+        printf "%s\n" "The panel is already running." >&2
+            exit 1
+        fi
+
+        trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+        [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+        mkfifo "$PANEL_FIFO"
+
+        bspc config top_padding $PANEL_HEIGHT
+        bspc control --subscribe > "$PANEL_FIFO" &
+        clock -sf 'S %H:%M' > "$PANEL_FIFO" &
+        clock -sf 'M %Y-%m-%d' > "$PANEL_FIFO" &
+
+cat "$PANEL_FIFO" | panel_bar | bar -g x$PANEL_HEIGHT -f "$PANEL_FONT_FAMILY" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
+
+wait

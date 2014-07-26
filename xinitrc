@@ -1,3 +1,12 @@
+#!/bin/sh
+
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+  for f in /etc/X11/xinit/xinitrc.d/*; do
+    [ -x "$f" ] && . "$f"
+  done
+  unset f
+fi
+
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 setxkbmap us -option caps:swapescape &
 xsetroot -cursor_name left_ptr &
@@ -8,4 +17,4 @@ sleep 10 && dropboxd &
 dunst &
 trayer --edge bottom --align right --SetDockType true --SetPartialStrut false --expand true --width 18 --height 22 --transparent true --alpha 255 & 
 sxhkd &
-exec dbus-launch bspwm
+exec bspwm
