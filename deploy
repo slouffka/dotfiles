@@ -1,0 +1,16 @@
+#!/bin/bash
+
+
+declare -a ARRAYORIGIN=($(cat .symlinks | awk '{print $1;}'))
+declare -a ARRAYDESTINY=($(cat .symlinks | awk '{print $2;}'))
+
+
+if [[ ${#ARRAYDESTINY[@]} == ${#ARRAYORIGIN[@]} ]]; then
+    declare -i LENGTH=${#ARRAYDESTINY[@]}
+    declare -i i=0
+    while [[ $i -lt $LENGTH ]]; do
+        echo ${ARRAYORIGIN[$i]} "->" ${ARRAYDESTINY[$i]}
+        ln -s ${ARRAYDESTINY[$i]} ${ARRAYORIGIN[$i]}
+        i=i+1
+    done
+fi
