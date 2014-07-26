@@ -9,6 +9,7 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 setxkbmap us -option caps:swapescape &
+xset -b &
 xsetroot -cursor_name left_ptr &
 nitrogen --restore &
 pulseaudio --start &
