@@ -8,28 +8,28 @@
 # ---------------------------------------------------------------------
 # Basic options --¬
 # ---------------------------------------------------------------------
-#
+
 setterm -bfreq 0
 fpath=(~/.zsh $fpath)
-bindkey '^R' history-incremental-pattern-search-backward
-
 autoload -Uz compinit && compinit
 
-export KEYTIMEOUT=1
-
-source ~/.zsh/prompto.theme
-source ~/.zsh/antigen/antigen.zsh
-
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-completions
+# Select completion style
 zstyle ':completion:*' menu select
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==02=01}:${(s.:.)LS_COLORS}")'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 bindkey '^[[Z' reverse-menu-complete
+bindkey '^R' history-incremental-pattern-search-backward
+export KEYTIMEOUT=1
+
+# ZSH sourcing
+source ~/.zsh/prompto.theme
 
 #-¬
 # ---------------------------------------------------------------------
 # Functions --¬
 # ---------------------------------------------------------------------
+
 # Search in wikipedia from the command line
 wiki() { dig +short txt $1.wp.dg.cx; }
 

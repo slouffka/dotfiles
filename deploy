@@ -13,5 +13,3 @@ if [[ ${#ARRAYDESTINY[@]} == ${#ARRAYORIGIN[@]} ]]; then
         i=i+1
     done
 fi
-
-git clone https://github.com/zsh-users/antigen.git zsh/antigen/
