@@ -1,0 +1,100 @@
+# Prompto# Author: Alex Sánchez <kniren@gmail.com>
+# Version: v2
+# Based on the theme "Pure" by Sindre Sorhus
+#   > https://github.com/sindresorhus/pure
+# MIT License
+
+# For my own and others sanity
+# git:
+# %b => current branch
+# prompt:
+# %F => color dict
+# %f => reset color
+# %~ => current path
+# %* => time
+# %n => username
+# %m => shortname host
+# %(?..) => prompt conditional - %(condition.true.false)
+
+# Git variables
+GIT_MODIFIED="%F{red}"
+GIT_UNTRACKED="%F{magenta}"
+GIT_PREFIX="%F{magenta}"
+GIT_BRANCH="%F{green}"
+DIRECTORY_PREFIX="%F{blue}"
+ROOT_INDICATOR="%F{red} ♦ "
+MODE_INDICATOR="%F{red}❮❮❮%f"
+
+# If the user is root display two indicators at both sides of the prompt
+prompto_check_root() {
+    [[ "$USER" == "root" ]] && echo $ROOT_INDICATOR
+}
+# fastest possible way to check if repo is dirty
+prompto_git_dirty() {
+    # check if we're in a git repo
+    command git rev-parse --is-inside-work-tree &>/dev/null || return
+    # check if it's dirty
+    command git diff --quiet --ignore-submodules HEAD &>/dev/null
+    (($? == 1)) && echo "$GIT_MODIFIED"
+}
+
+prompto_git_untracked() {
+    # check if we're in a git repo
+    command git rev-parse --is-inside-work-tree &>/dev/null || return
+    # check if there are untracked files
+    [[ ! -z $(git ls-files --others --exclude-standard) ]] && echo "$GIT_UNTRACKED"
+}
+
+# string length ignoring ansi escapes
+prompto_string_length() {
+    echo ${#${(S%%)1//(\%([KF1]|)\{*\}|\%[Bbkf])}}
+}
+
+prompto_precmd() {
+    # shows the full path in the title
+    print -Pn '\e]0;%~\a'
+    # git info
+    vcs_info
+    git_untracked=''
+    local prompto_preprompt="$PROMPTO_USERNAME$DIRECTORY_PREFIX%~%f%"
+    print -P $prompto_preprompt
+    RPROMPT="${RPS2}"
+}
+
+prompto_setup() {
+    # prevent percentage showing up
+    # if output doesn't end with a newline
+    export PROMPT_EOL_MARK=''
+
+    prompt_opts=(cr subst percent)
+
+    autoload -Uz add-zsh-hook
+    autoload -Uz vcs_info
+
+    add-zsh-hook precmd prompto_precmd
+
+    zstyle ':vcs_info:*' enable git
+    zstyle ':vcs_info:git*' formats ' %b'
+
+    # show username@host if logged in through SSH
+    [[ "$SSH_CONNECTION" != '' ]] && PROMPTO_USERNAME='%F{cyan}%n %F{black}• %F{green}%m %F{black}• %f'
+
+    # prompt turns red if the previous command didn't exit with 0
+    PROMPT="`prompto_check_root`%(?.%F{cyan}.%F{red})❯ %f"
+}
+
+prompto() {
+    echo wooot
+}
+
+function zle-line-init zle-keymap-select {
+    RPS1="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}$GIT_BRANCH`prompto_git_untracked``prompto_git_dirty`$vcs_info_msg_0_`prompto_check_root`"
+    RPS2=$RPS1
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+prompto_setup "$@"
+

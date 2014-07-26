@@ -4,7 +4,6 @@
 declare -a ARRAYORIGIN=($(cat .symlinks | awk '{print $1;}'))
 declare -a ARRAYDESTINY=($(cat .symlinks | awk '{print $2;}'))
 
-
 if [[ ${#ARRAYDESTINY[@]} == ${#ARRAYORIGIN[@]} ]]; then
     declare -i LENGTH=${#ARRAYDESTINY[@]}
     declare -i i=0
@@ -14,3 +13,5 @@ if [[ ${#ARRAYDESTINY[@]} == ${#ARRAYORIGIN[@]} ]]; then
         i=i+1
     done
 fi
+
+git clone https://github.com/zsh-users/antigen.git zsh/antigen/

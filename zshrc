@@ -8,15 +8,23 @@
 # ---------------------------------------------------------------------
 # Basic options --¬
 # ---------------------------------------------------------------------
-DISABLE_AUTO_UPDATE="true"
-ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="prompto"
+#
 setterm -bfreq 0
-plugins=(git archlinux zsh-syntax-highlighting vi-mode)
-source $ZSH/oh-my-zsh.sh
+fpath=(~/.zsh $fpath)
 bindkey '^R' history-incremental-pattern-search-backward
+
+autoload -Uz compinit && compinit
+
 export KEYTIMEOUT=1
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern )
+
+source ~/.zsh/prompto.theme
+source ~/.zsh/antigen/antigen.zsh
+
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-completions
+zstyle ':completion:*' menu select
+
+bindkey '^[[Z' reverse-menu-complete
 
 #-¬
 # ---------------------------------------------------------------------
@@ -73,6 +81,8 @@ say() {
 # ---------------------------------------------------------------------
 # Aliases --¬
 # ---------------------------------------------------------------------
+# General purpose
+# ---------------------------------------------------------------------
 alias tmux="TERM=xterm-256color tmux"
 alias z="zathura"
 alias clc="clear"
@@ -90,6 +100,34 @@ alias updates="pacman -Qqu"
 alias ssh="export TERM='xterm-256color'; ssh"
 alias whosfat="du --max-depth=1 -h | sort --ignore-case --reverse -h | head -10"
 alias cam="mplayer tv://"
-# If you use this you are definitely insane: fortune | cowsay | lolcat
+# ---------------------------------------------------------------------
+# Archlinux
+# ---------------------------------------------------------------------
+alias pacupg='sudo pacman -Syu'    # Synchronize with repositories before upgrading packages that are out of date on the local system.
+alias pacin='sudo pacman -S'       # Install specific package(s) from the repositories
+alias pacinstall='sudo pacman -U'  # Install specific package not from the repositories but from a file
+alias pacrem='sudo pacman -R'      # Remove the specified package(s), retaining its configuration(s) and required dependencies
+alias pacremove='sudo pacman -Rns' # Remove the specified package(s), its configuration(s) and unneeded dependencies
+alias pacsearch='pacman -Ss'       # Search for package(s) in the repositories
+alias ain='sudo aura -A'           # Install package from AUR
+alias aupg='sudo aura -Ayu'        # Upgrade AUR and system packages
+# ---------------------------------------------------------------------
+# Git
+# ---------------------------------------------------------------------
+alias g='git'
+compdef g=git
+alias gb='git branch'
+compdef _git gb=git-branch
+alias gst='git status'
+compdef _git gst=git-status
+alias gdiff='git diff'
+gdv() { git diff -w "$@" | view - }
+compdef _git gdv=git-diff
+alias gmer='git merge'
+compdef _git gm=git-merge
+alias gco='git checkout'
+compdef _git gco=git-checkout
+alias gc='git commit -a -m'
+alias grt='cd $(git rev-parse --show-toplevel || echo ".")' # Return to root of rep.
 # -¬
 # ---------------------------------------------------------------------

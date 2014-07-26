@@ -10,3 +10,4 @@ xinitrc      ~/.xinitrc
 Xresources   ~/.Xresources
 zprofile     ~/.zprofile
 zshrc        ~/.zshrc
+zsh          ~/.zsh
