@@ -1,0 +1,23 @@
+#!/bin/bash
+# ------------------------------------------------------------------
+#
+#     netinfo
+#     Description: Script for piping the current ESSID through bar
+#     Author: Alex Sánchez <kniren@gmail.com>
+#
+# ------------------------------------------------------------------
+
+while true; do
+    sudo ip link set enp3s0 up
+    if [[ $(cat /sys/class/net/enp3s0/carrier) = 1 ]]; then
+        ESSID="( wired )"
+    else
+        ESSID=$(iwconfig wlp4s0 |  awk -F '"' 'NR==1 {print $2}')
+        if [[ $ESSID = "" ]]; then
+            ICON=""
+        fi
+    fi
+
+    echo "N $ESSID"
+    sleep 5
+done

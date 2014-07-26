@@ -12,6 +12,8 @@
 setterm -bfreq 0
 fpath=(~/.zsh $fpath)
 autoload -Uz compinit && compinit
+autoload insert-unicode-char
+zle -N insert-unicode-char
 
 # Select completion style
 zstyle ':completion:*' menu select
@@ -20,6 +22,7 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 
 bindkey '^[[Z' reverse-menu-complete
 bindkey '^R' history-incremental-pattern-search-backward
+bindkey '^U' insert-unicode-char
 export KEYTIMEOUT=1
 
 # ZSH sourcing
@@ -91,6 +94,7 @@ alias :q="exit"
 alias :Q="exit"
 alias :e="vim"
 alias :E="vim"
+alias -g ..='cd ..'
 alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
