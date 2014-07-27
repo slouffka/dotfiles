@@ -19,8 +19,9 @@ if [ $(pgrep -cx panel) -gt 1 ] ; then
 
         bspc config top_padding $PANEL_HEIGHT
         bspc control --subscribe > "$PANEL_FIFO" &
-        clock -sf "S%{F$COLOR01} %Y-%m-%d%{F$COLOR03} %H:%M" > "$PANEL_FIFO" &
+        clock -sf "S %Y-%m-%d %H:%M" > "$PANEL_FIFO" &
         netinfo > "$PANEL_FIFO" &
+        batinfo > "$PANEL_FIFO" &
 
 cat "$PANEL_FIFO" | panel_bar | bar -g x$PANEL_HEIGHT -f "$FONT1","$FONT2" -F "$COLOR_FOREGROUND" -B "$COLOR_BACKGROUND" &
 

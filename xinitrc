@@ -10,8 +10,10 @@ fi
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 setxkbmap us -option caps:swapescape &
 xset -b &
-xset +fp /usr/share/fonts/local &
+xset +fp /usr/share/fonts/local
 xset fp rehash
+xset +dpms
+xset dpms 0 0 300
 xsetroot -cursor_name left_ptr &
 nitrogen --restore &
 pulseaudio --start &

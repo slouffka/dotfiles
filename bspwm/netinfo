@@ -7,8 +7,8 @@
 #
 # ------------------------------------------------------------------
 
+sudo ip link set enp3s0 up
 while true; do
-    sudo ip link set enp3s0 up
     if [[ $(cat /sys/class/net/enp3s0/carrier) = 1 ]]; then
         ESSID="( wired )"
     else

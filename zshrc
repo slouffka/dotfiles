@@ -24,6 +24,9 @@ bindkey '^[[Z' reverse-menu-complete
 bindkey '^R' history-incremental-pattern-search-backward
 bindkey '^U' insert-unicode-char
 export KEYTIMEOUT=1
+export HISTSIZE=1000
+export SAVEHIST=1000
+export HISTFILE="$HOME/.zsh_history"
 
 # ZSH sourcing
 source ~/.zsh/prompto.theme
