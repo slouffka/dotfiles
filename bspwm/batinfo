@@ -8,10 +8,10 @@
 # ------------------------------------------------------------------
 
 while true; do
-    BAT=`acpi -b | cut -d " " -f4 | tr -d '%' | tr -d ','`
-    STAT=`acpi -b | cut -d " " -f3 | tr -d '%' | tr -d ','`
+    BAT=`acpi -b | grep "Battery 1" | cut -d " " -f4 | tr -d '%' | tr -d ','`
+    STAT=`acpi -b | grep "Battery 1" | cut -d " " -f3 | tr -d '%' | tr -d ','`
     PREFIX="H"
-    if [[ $BAT -lt 50  ]]; then
+    if [[ "$BAT" -lt 50  ]]; then
         PREFIX="M"
     fi
     if [[ $BAT -lt 20  ]]; then
