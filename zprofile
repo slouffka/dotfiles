@@ -4,6 +4,7 @@
 export PATH=$PATH:~/Scripts
 export PATH=$PATH:~/Scripts/peat
 export PATH=$PATH:~/.config/bspwm
+export PATH=$PATH:~/.cabal/bin
 # -¬
 # ---------------------------------------------------------------------
 # Linux terminal colors --¬
@@ -42,3 +43,4 @@ export NOTEDIR=~/.notes/
 # ---------------------------------------------------------------------
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
 # -¬
+# ---------------------------------------------------------------------

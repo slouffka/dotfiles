@@ -9,7 +9,6 @@
 # Basic options --¬
 # ---------------------------------------------------------------------
 
-setterm -bfreq 0
 fpath=(~/.zsh $fpath)
 autoload -Uz compinit && compinit
 autoload insert-unicode-char
