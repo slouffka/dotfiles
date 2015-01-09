@@ -1,13 +1,5 @@
-bspwm        ~/.config/bspwm/
-sxhkd        ~/.config/sxhkd/
-ncmpcpp      ~/.ncmpcpp
-termite      ~/.config/termite/
 dircolors    ~/.dircolors
-dunstrc      ~/.dunstrc
-mpd.conf     ~/.mpd.conf
 tmux.conf    ~/.tmux.conf
-xinitrc      ~/.xinitrc
-Xresources   ~/.Xresources
 zprofile     ~/.zprofile
 zshrc        ~/.zshrc
 zsh          ~/.zsh
