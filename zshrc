@@ -1,4 +1,4 @@
-# ------------------------------------------------------------------
+#------------------------------------------------------------------
 #
 #     .zshrc 
 #     Author: Alex Sánchez <kniren@gmail.com>
@@ -29,6 +29,8 @@ export HISTFILE="$HOME/.zsh_history"
 
 # ZSH sourcing
 source ~/.zsh/prompto.theme
+source ~/.zprofile
+eval `dircolors -b ~/.dircolors`
 
 #-¬
 # ---------------------------------------------------------------------
@@ -96,27 +98,15 @@ alias :q="exit"
 alias :Q="exit"
 alias :e="vim"
 alias :E="vim"
-alias -g ..='cd ..'
-alias -g ...='../..'
-alias -g ....='../../..'
-alias -g .....='../../../..'
-alias l="ls -lah"
-alias ls="ls --group-directories-first --color=always"
-alias updates="pacman -Qqu"
+alias ..='cd ..'
+alias ...='../..'
+alias ....='../../..'
+alias .....='../../../..'
 alias ssh="export TERM='xterm-256color'; ssh"
 alias whosfat="du --max-depth=1 -h | sort --ignore-case --reverse -h | head -10"
-alias cam="mplayer tv://"
-# ---------------------------------------------------------------------
-# Archlinux
-# ---------------------------------------------------------------------
-alias pacupg='sudo pacman -Syu'    # Synchronize with repositories before upgrading packages that are out of date on the local system.
-alias pacin='sudo pacman -S'       # Install specific package(s) from the repositories
-alias pacinstall='sudo pacman -U'  # Install specific package not from the repositories but from a file
-alias pacrem='sudo pacman -R'      # Remove the specified package(s), retaining its configuration(s) and required dependencies
-alias pacremove='sudo pacman -Rns' # Remove the specified package(s), its configuration(s) and unneeded dependencies
-alias pacsearch='pacman -Ss'       # Search for package(s) in the repositories
-alias ain='sudo aura -A'           # Install package from AUR
-alias aupg='sudo aura -Ayu'        # Upgrade AUR and system packages
+alias ls="ls --color=always" 
+alias grep="grep --color=always"
+alias egrep="egrep --color=always"
 # ---------------------------------------------------------------------
 # Git
 # ---------------------------------------------------------------------
